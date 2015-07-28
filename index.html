@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>PrinceJS - An HTML5 port of Prince of Persia</title>
+	<script src="lib/phaser.min.js"></script>
+	<script src="src/Boot.js"></script>
+	<script src="src/Preloader.js"></script>
+	<script src="src/Game.js"></script>
+    <script src="src/Utils.js"></script>
+    <script src="src/Title.js"></script>
+    <script src="src/EndTitle.js"></script>
+    <script src="src/Credits.js"></script>
+    <script src="src/Cutscene.js"></script>
+    <script src="src/Scene.js"></script>
+    <script src="src/Level.js"></script>
+    <script src="src/LevelBuilder.js"></script>
+    <script src="src/Actor.js"></script>
+    <script src="src/Fighter.js"></script>
+    <script src="src/Enemy.js"></script>
+    <script src="src/Kid.js"></script>
+    <script src="src/Interface.js"></script>
+    <script src="src/tiles/Base.js"></script>
+    <script src="src/tiles/Star.js"></script>
+    <script src="src/tiles/Clock.js"></script>
+    <script src="src/tiles/Torch.js"></script>
+    <script src="src/tiles/Spikes.js"></script>
+    <script src="src/tiles/Loose.js"></script>
+    <script src="src/tiles/Button.js"></script>
+    <script src="src/tiles/ExitDoor.js"></script>
+    <script src="src/tiles/Gate.js"></script>
+    <script src="src/tiles/Potion.js"></script>
+    <script src="src/tiles/Sword.js"></script>
+    <script src="src/tiles/Chopper.js"></script>
+    <style>
+        body {
+            background-image: url(img/prince_back_1920.jpg);
+        }
+
+        @media screen and (min-width: 1300px) {
+            body {
+                background-image: url(img/prince_back_1920.jpg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="float: right; margin-top: 10px; margin-right: 20px;" >
+        <a href="http://ultrabolido.wordpress.com"><img src="img/wordpress.png" width="50px" height="50px" border="0"/></a>
+        <br/>
+        <a href="http://twitter.com/ultrabolido"><img src="img/twitter.png" width="50px" height="50px" border="0"/></a>
+    </div>
+<div style="padding-left: 112px; padding-top: 183px;" id="gameContainer"></div>
+    
+<script type="text/javascript">
+
+window.onload = function() {
+
+	var game = new Phaser.Game(640, 400, Phaser.AUTO, 'gameContainer',null,false,false);
+	
+    game.state.add('Boot', PrinceJS.Boot);
+	game.state.add('Preloader', PrinceJS.Preloader);
+	game.state.add('Game', PrinceJS.Game);
+    game.state.add('Title', PrinceJS.Title);
+    game.state.add('EndTitle', PrinceJS.EndTitle);
+    game.state.add('Credits', PrinceJS.Credits);
+    game.state.add('Cutscene', PrinceJS.Cutscene);
+
+	game.state.start('Boot');
+
+};
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+    "program": [ { "i": "ADD_ACTOR", "p1": 0, "p2": "princess", "p3": 73,  "p4": 170, "p5": -1 },
+                 { "i": "ADD_ACTOR", "p1": 1, "p2": "mouse", "p3": 86,  "p4": 168, "p5": -1 },
+                 { "i": "ADD_OBJECT", "p1": 0, "p2": 2, "p3": 152, "p4": 141 },
+                 { "i": "START_OBJECT", "p1": 0 },
+                 { "i": "START" },
+                 { "i": "ACTION", "p1": 0, "p2": "stroke" },
+                 { "i": "ACTION", "p1": 1, "p2": "stop" },
+                 { "i": "WAIT", "p1": 30 },
+                 { "i": "ACTION", "p1": 1, "p2": "leave" },
+                 { "i": "WAIT", "p1": 20 },
+                 { "i": "ACTION", "p1": 0, "p2": "rise" },
+                 { "i": "WAIT", "p1": 20 },
+                 { "i": "END" } ]
+    
+}
