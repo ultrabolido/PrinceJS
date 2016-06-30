@@ -71,8 +71,7 @@ PrinceJS.Interface.prototype = {
     },
     
     setOpponentLive: function(actor) {
-        
-        if (actor.charName == 'skeleton') return;
+        if (!actor || actor.charName == 'skeleton') return;
         
         this.oppHPActive = actor.health;
         for (var i=actor.health; i > 0; i--) {
