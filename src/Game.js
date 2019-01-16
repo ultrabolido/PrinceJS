@@ -33,9 +33,6 @@ PrinceJS.Game.prototype = {
 
         }
 
-        json.prince.room = 2;
-        json.prince.location = 19;
-
         this.kid = new PrinceJS.Kid(this.game,this.level,json.prince.location,json.prince.direction,json.prince.room);
 
         this.kid.onChangeRoom.add(this.setupCamera, this);
