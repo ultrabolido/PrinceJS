@@ -1,0 +1,23 @@
+{
+    "program": [ { "i": "ADD_ACTOR", "p1": 0, "p2": "princess", "p3": 78,  "p4": 165, "p5": -1 },
+                 { "i": "ADD_ACTOR", "p1": 1, "p2": "kid", "p3": 140,  "p4": 165, "p5": -1 },
+                 { "i": "ADD_ACTOR", "p1": 2, "p2": "mouse", "p3": 144,  "p4": 165, "p5": -1 },
+                 { "i": "START" },
+                 { "i": "ACTION", "p1": 0, "p2": "wait" },
+                 { "i": "ACTION", "p1": 1, "p2": "stand" },
+                 { "i": "ACTION", "p1": 2, "p2": "stop" },
+                 { "i": "WAIT", "p1": 10 },
+                 { "i": "ACTION", "p1": 1, "p2": "startrun" },
+                 { "i": "WAIT", "p1": 9 },
+                 { "i": "ACTION", "p1": 0, "p2": "embrace" },
+                 { "i": "WAIT", "p1": 4 },
+                 { "i": "ACTION", "p1": 1, "p2": "runstop" },
+                 { "i": "WAIT", "p1": 1 },
+                 { "i": "REM_ACTOR", "p1": 1 },
+                 { "i": "WAIT", "p1": 20 },
+                 { "i": "ACTION", "p1": 2, "p2": "scurry" },
+                 { "i": "WAIT", "p1": 10 },
+                 { "i": "ACTION", "p1": 2, "p2": "raise" },
+                 { "i": "WAIT", "p1": 20 },
+                 { "i": "END" } ]
+}

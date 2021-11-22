@@ -1,0 +1,39 @@
+{"frames": {
+
+"mouse-1":
+{
+	"frame": {"x":2,"y":2,"w":17,"h":4},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":4},
+	"sourceSize": {"w":17,"h":4},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"mouse-2":
+{
+	"frame": {"x":21,"y":2,"w":19,"h":4},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":4},
+	"sourceSize": {"w":19,"h":4},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"mouse-3":
+{
+	"frame": {"x":42,"y":2,"w":12,"h":10},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":10},
+	"sourceSize": {"w":12,"h":10},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "mouse.png",
+	"format": "RGBA8888",
+	"size": {"w":56,"h":14},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:34ff5af1d7108ee5ba1f237d9b846b3f:91853c7b77abacc2862a2d0126a77962:cce20e9c955816a05cd8e3dc11a0bf85$"
+}
+}
