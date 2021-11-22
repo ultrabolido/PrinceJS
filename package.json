@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "webpack serve --mode development --entry ./src/main.js",
-    "build": "webpack --mode production --entry ./src/main.js --output-path ./dist/princejs",
-    "dev": "webpack --mode development --entry ./src/main.js --output-path ./dist/princejs"
+    "build": "webpack --mode production --entry ./src/main.js --output-path ./dist",
+    "dev": "webpack --mode development --entry ./src/main.js --output-path ./dist"
   },
   "repository": {
     "type": "git",
