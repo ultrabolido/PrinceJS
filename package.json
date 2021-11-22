@@ -1,0 +1,36 @@
+{
+  "name": "princejs",
+  "version": "1.0.0",
+  "description": "Prince of Persia reimplementation",
+  "main": "main.js",
+  "scripts": {
+    "start": "webpack serve --mode development --entry ./src/main.js",
+    "build": "webpack --mode production --entry ./src/main.js --output-path ./dist/princejs",
+    "dev": "webpack --mode development --entry ./src/main.js --output-path ./dist/princejs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ultrabolido/PrinceJS.git"
+  },
+  "author": "ultrabolido",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ultrabolido/PrinceJS/issues"
+  },
+  "homepage": "https://github.com/ultrabolido/PrinceJS#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^9.0.1",
+    "html-loader": "^3.0.1",
+    "html-webpack-plugin": "^5.5.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.62.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
+  },
+  "dependencies": {
+    "phaser": "^3.55.2"
+  }
+}
