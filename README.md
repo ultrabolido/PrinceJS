@@ -1,4 +1,4 @@
-# Prince of Persia (1989) por for the web
+# Prince of Persia (1989) port for the web
 
 Prince of Persia reimplementation written in HTML5/Javascript using assets from the MSDOS version.
 
@@ -6,9 +6,9 @@ Prince of Persia reimplementation written in HTML5/Javascript using assets from 
 
 - Browser: https://ultrabolido.github.io/PrinceJS/
 - Controls:
-  - Cursor keys: prince movement
-  - SHIFT: sword/drink potion/grab edges
-  - ENTER: continue game after dead
+  - `Cursor keys`: prince movement
+  - `SHIFT`: sword/drink potion/grab edges
+  - `ENTER`: continue game after dead
 
 ## Work in progress
 
