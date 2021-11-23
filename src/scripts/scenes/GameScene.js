@@ -6,6 +6,7 @@ import Enemy from '../actors/Enemy';
 import LevelManager from '../levels/LevelManager';
 import { ROOM_HEIGHT, ROOM_WIDTH } from '../Config'
 import { TILE } from '../Constants';
+import { toMinutes, toMilliseconds } from '../Utils';
 
 const RED_COLOR = 'rgba(255,85,85,1)';
 const STRONG_RED_COLOR = 'rgba(170,0,0,1)';
@@ -69,6 +70,13 @@ class GameScene extends Scene {
         this.input.keyboard.on('keydown-ENTER', this.restart, this);
         this.input.keyboard.on('keydown-SPACE', this.showTimeLeft, this);
         
+        this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.MINUS).on('down', this.decrementTime, this); // MINUS key on Chrome
+        this.input.keyboard.addKey(173).on('down', this.decrementTime, this); // MINUS key on Firefox
+        this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_SUBTRACT).on('down', this.decrementTime, this); // MINUS key on numpad
+
+
+        this.time.addEvent({delay: 1000, loop: true, callback: this.updateTime, callbackScope: this});
+        
 	}
     
     update() {
@@ -79,6 +87,30 @@ class GameScene extends Scene {
         this.ui.update();
         this.flash()
          
+    }
+
+    updateTime() {
+        GameState.timeLeft -= 1000;
+        const min = toMinutes(GameState.timeLeft);
+        if (min == 0) {
+            this.gameOver();
+        } else {
+            if ((min % 5 == 0) || (min <= 1)) this.showTimeLeft();
+        }
+        
+    }
+
+    decrementTime() {
+        console.log('decrement');
+        const min = toMinutes(GameState.timeLeft);
+        GameState.timeLeft = toMilliseconds(Math.ceil(min - 1));
+        this.showTimeLeft();
+    }
+
+    incrementTime() {
+        const min = toMinutes(GameState.timeLeft);
+        GameState.timeLeft = toMilliseconds(Math.floor(min) + 1);
+        this.showTimeLeft();
     }
 
     flash() {
@@ -108,7 +140,7 @@ class GameScene extends Scene {
     }
 
     showTimeLeft() {
-        this.ui.showTimeLeft(0);
+        this.ui.showTimeLeft();
     }
     
 	nextLevel() {
@@ -140,6 +172,15 @@ class GameScene extends Scene {
         
         }
         
+    }
+
+    gameOver() {
+        GameState.currentLevel = 16;
+        GameState.kidHasSword = false;
+        GameState.kidHealth = 3;
+        GameState.kidMaxHealth = 3;
+        GameState.timeLeft = 3600000;
+        this.scene.start('CutScene');
     }
 
     restart() {

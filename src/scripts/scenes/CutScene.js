@@ -148,23 +148,12 @@ class CutScene extends Scene {
         
     nextScene() {
         
-        if (GameState.currentLevel == 1) {
-            
-            this.scene.start('CreditsScene');
-        
-        } else {
-            
-            if (GameState.currentLevel == 15) {
+        switch (GameState.currentLevel) {
 
-                GameState.currentLevel = 1;
-                this.scene.start('EndGameScene');
-                
-            } else {
-        
-                this.scene.start('GameScene');
-                
-            }
-            
+            case 1: this.scene.start('CreditsScene'); break;
+            case 15: GameState.currentLevel = 1; this.scene.start('EndGameScene'); break;
+            case 16: GameState.currentLevel = 1; this.scene.start('TitleScene'); break;
+            default: this.scene.start('GameScene');
         }
         
     }

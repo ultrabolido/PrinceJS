@@ -39,7 +39,7 @@ class PreloadScene extends Scene {
             this.load.json('level' + i,'assets/maps/level' + i + '.json');
         }
         
-        [1,2,4,6,8,9,12,15].forEach( i => {
+        [1,2,4,6,8,9,12,15,16].forEach( i => {
             this.load.json('cutscene' + i,'assets/cutscenes/scene' + i + '.json');
         })
         

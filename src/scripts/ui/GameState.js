@@ -3,5 +3,5 @@ export default {
     kidMaxHealth: 3,
     kidHealth: 3,
     kidHasSword: true,
-    timeLeft: 60
+    timeLeft: 3600000
 }

@@ -1,5 +1,6 @@
 import GameState from "./GameState";
 import { SCREEN_HEIGHT, SCREEN_WIDTH, UI_HEIGHT } from "../Config";
+import { toMinutes, toSeconds } from '../Utils';
 
 class Interface {
 
@@ -24,13 +25,30 @@ class Interface {
         this.player;
         this.oponent;
 
-        this.showTimeLeft(1500);
-
+        this.scene.time.delayedCall(1500, this.showTimeLeft, [], this);
     }
 
-    showTimeLeft(delay) {
-        this.scene.time.delayedCall(delay, this.showText, [GameState.timeLeft + ' MINUTES LEFT'], this);
-        this.scene.time.delayedCall(delay + 1500, this.showText, [''], this);
+    showTimeLeft() {
+
+        if (this.deleteTextEvent) {
+            this.scene.time.removeEvent(this.deleteTextEvent);
+            this.deleteTextEvent = null;
+        }
+
+        const min = toMinutes(GameState.timeLeft);
+        let txt = Math.ceil(min) + ' MINUTES LEFT';
+
+        if (min <= 1) {
+            const sec = toSeconds(GameState.timeLeft);
+            if (sec == 1) {
+                txt = sec + ' SECOND LEFT';
+            } else {
+                txt = sec + ' SECONDS LEFT';
+            }
+        }
+
+        this.showText(txt);
+        if (min > 1) this.deleteTextEvent = this.scene.time.delayedCall(1500, this.showText, [''], this);
     }
 
     showText(txt) {

@@ -38,3 +38,15 @@ export function distanceToEdgeFromX( x ) {
         return x - edge;
 
 }
+
+export function toMinutes(time) {
+        return time / 60000;
+}
+
+export function toSeconds(time) {
+        return Math.ceil ( time / 1000 );
+}
+
+export function toMilliseconds(time) {
+        return time * 60000;
+}
