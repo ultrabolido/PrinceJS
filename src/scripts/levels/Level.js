@@ -107,7 +107,12 @@ class Level {
         
         if (newRoom == -1) return this.dummyWall;
         
-        return this.rooms[newRoom].tiles[x + y * 10];
+        if (this.rooms[newRoom]) {
+            return this.rooms[newRoom].tiles[x + y * 10];
+        } else {
+            return null;
+        }
+        
         
     }
     
@@ -218,21 +223,25 @@ class Level {
         console.log('Fire ' + event + ' - ' + room + ' ' + x + ' ' + y);
         
         var tile = this.getTileAt(x, y, room);
-        
-        if ( tile.tileType == TILE.EXIT_LEFT ) { 
-            
-            tile = this.getTileAt(x + 1, y, room);
-        
-        }
+
+        if (tile != null) {
+
+            if ( tile.tileType == TILE.EXIT_LEFT ) { 
                 
-        if (type == TILE.RAISE_BUTTON) {
+                tile = this.getTileAt(x + 1, y, room);
             
-            tile.raise();
-            
-        } else {
-            
-            tile.drop();
-            
+            }
+                    
+            if (type == TILE.RAISE_BUTTON) {
+                
+                tile.raise();
+                
+            } else {
+                
+                tile.drop();
+                
+            }
+
         }
         
         if (this.events[event].next)
