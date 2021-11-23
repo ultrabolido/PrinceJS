@@ -16,18 +16,13 @@ class GameScene extends Scene {
 
     constructor() {
         super('GameScene');
-
-        this.kid;
-        this.level;
-        this.ui;
-        this.guards = [];
-
-        this.flashCount = 0;
     }
     
     create() {
 
-        //GameState.currentLevel = 4;
+        this.flashCount = 0;
+        this.guards = [];
+
         const json = this.cache.json.get('level' + GameState.currentLevel);
 
         this.backLayer = this.add.layer().setDepth(10);
@@ -55,7 +50,6 @@ class GameScene extends Scene {
         
         
         this.setupCamera(json.prince.room);
-        this.currentRoom = json.prince.room;
         
         this.ui = new Interface(this);
         this.ui.setPlayer(this.kid);
@@ -67,10 +61,10 @@ class GameScene extends Scene {
         this.input.keyboard.on('keydown-W', this.nextLevel, this);
         this.input.keyboard.on('keydown-R', this.reset, this);
 
-        this.input.keyboard.on('keydown-K', this.bottomRoom, this);
-        this.input.keyboard.on('keydown-I', this.topRoom, this);
-        this.input.keyboard.on('keydown-J', this.leftRoom, this);
-        this.input.keyboard.on('keydown-L', this.rightRoom, this);
+        this.input.keyboard.on('keydown-U', this.viewRoom, this);
+        this.input.keyboard.on('keydown-H', this.viewRoom, this);
+        this.input.keyboard.on('keydown-J', this.viewRoom, this);
+        this.input.keyboard.on('keydown-N', this.viewRoom, this);
 
         this.input.keyboard.on('keydown-ENTER', this.restart, this);
         this.input.keyboard.on('keydown-SPACE', this.showTimeLeft, this);
@@ -135,8 +129,6 @@ class GameScene extends Scene {
 	}
     
     reset() {
-     
-        this.guards = [];
         
         if ( [2,4,6,8,9,12,15].indexOf(GameState.currentLevel) > -1 ) {
             
@@ -163,6 +155,7 @@ class GameScene extends Scene {
       
         this.cameras.main.scrollX = this.level.rooms[room].x * ROOM_WIDTH;
         this.cameras.main.scrollY = this.level.rooms[room].y * ROOM_HEIGHT;
+        this.currentRoom = room;
         
     }
 
@@ -187,37 +180,29 @@ class GameScene extends Scene {
         });
     }
 
-    bottomRoom() {
-        const room = this.level.rooms[this.currentRoom].links.down;
-        if (room != -1) {
-            this.currentRoom = room;
-            this.setupCamera(room);
+    viewRoom(event) {
+
+        let room = -1;
+
+        switch (event.key) {
+            case 'u':
+            case 'U':
+                 room = this.level.rooms[this.currentRoom].links.up; break;
+            case 'n': 
+            case 'N':
+                room = this.level.rooms[this.currentRoom].links.down; break;
+            case 'h': 
+            case 'H':
+                room = this.level.rooms[this.currentRoom].links.left; break;
+            case 'j':
+            case 'J':
+                room = this.level.rooms[this.currentRoom].links.right; break;
         }
+       
+        if (room != -1) this.setupCamera(room);
+    
     }
 
-    topRoom() {
-        const room = this.level.rooms[this.currentRoom].links.up;
-        if (room != -1) {
-            this.currentRoom = room;
-            this.setupCamera(room);
-        }
-    }
-
-    leftRoom() {
-        const room = this.level.rooms[this.currentRoom].links.left;
-        if (room != -1) {
-            this.currentRoom = room;
-            this.setupCamera(room);
-        }
-    }
-
-    rightRoom() {
-        const room = this.level.rooms[this.currentRoom].links.right;
-        if (room != -1) {
-            this.currentRoom = room;
-            this.setupCamera(room);
-        }
-    }
 }
 
 export default GameScene;
