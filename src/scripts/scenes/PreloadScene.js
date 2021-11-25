@@ -13,7 +13,7 @@ class PreloadScene extends Scene {
 
         this.add.bitmapText(this.scale.width * 0.5, this.scale.height * 0.5, 'font','Loading. . . .',16).setOrigin(0.5,0.5);
 
-        
+        // graphics
         this.load.atlas('kid','assets/gfx/kid.png','assets/gfx/kid.json');
         this.load.atlas('princess','assets/gfx/princess.png','assets/gfx/princess.json');
         this.load.atlas('vizier','assets/gfx/vizier.png','assets/gfx/vizier.json');
@@ -28,6 +28,8 @@ class PreloadScene extends Scene {
         this.load.atlas('general','assets/gfx/general.png','assets/gfx/general.json');
         this.load.atlas('title','assets/gfx/title.png','assets/gfx/title.json');
         this.load.atlas('cutscene','assets/gfx/cutscene.png','assets/gfx/cutscene.json');
+
+        // animations
         this.load.json('kid-anims','assets/anims/kid.json');
         this.load.json('sword-anims','assets/anims/sword.json');
         this.load.json('fighter-anims','assets/anims/fighter.json');
@@ -35,10 +37,16 @@ class PreloadScene extends Scene {
         this.load.json('vizier-anims','assets/anims/vizier.json');
         this.load.json('mouse-anims','assets/anims/mouse.json');
 
+        // audio
+        this.load.audioSprite('sounds', 'assets/audio/sounds.json','assets/audio/sounds.ogg');
+        this.load.audioSprite('music', 'assets/audio/music.json','assets/audio/music.ogg');
+
+        // levels
         for ( var i=0; i<16; i++) {
             this.load.json('level' + i,'assets/maps/level' + i + '.json');
         }
-        
+
+        // cutscenes
         [1,2,4,6,8,9,12,15,16].forEach( i => {
             this.load.json('cutscene' + i,'assets/cutscenes/scene' + i + '.json');
         })
@@ -84,7 +92,7 @@ class PreloadScene extends Scene {
 
 		if (SKIP_TITLE) {
             
-            this.scene.start('GameScene');
+            this.scene.start('CutScene');
             
         } else {
             
@@ -101,8 +109,6 @@ class PreloadScene extends Scene {
     }
 
     generateWallPattern(room) {
-
-        console.log("Generating wall pattern for room: " + room);
         
         this.wallPattern[room] = [];
         this.seed = room;
@@ -124,7 +130,6 @@ class PreloadScene extends Scene {
                     } while (color == prevColor);
                     
                     this.wallPattern[room][44 * row + 11 * subrow + col] = color;
-                    //console.log('color: ' + color);
                     prevColor = color;
                     
                 }

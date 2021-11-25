@@ -1,0 +1,117 @@
+{
+  "resources": [
+    "music.ogg"
+  ],
+  "spritemap": {
+    "01-prologue-a": {
+      "start": 0,
+      "end": 25.21832199546485,
+      "loop": false
+    },
+    "02-prologue-b": {
+      "start": 27,
+      "end": 44.436734693877554,
+      "loop": false
+    },
+    "03-princess": {
+      "start": 46,
+      "end": 62.658866213151924,
+      "loop": false
+    },
+    "04-jaffar-1": {
+      "start": 64,
+      "end": 80.48761904761905,
+      "loop": false
+    },
+    "05-heartbeat-1": {
+      "start": 82,
+      "end": 111.59238095238095,
+      "loop": false
+    },
+    "06-danger": {
+      "start": 113,
+      "end": 117.09977324263039,
+      "loop": false
+    },
+    "07-accident": {
+      "start": 119,
+      "end": 125.06185941043084,
+      "loop": false
+    },
+    "08-potion-1": {
+      "start": 127,
+      "end": 131.52353741496597,
+      "loop": false
+    },
+    "09-victory-1": {
+      "start": 133,
+      "end": 139.03863945578232,
+      "loop": false
+    },
+    "10-victory-2": {
+      "start": 141,
+      "end": 146.06340136054422,
+      "loop": false
+    },
+    "11-prince": {
+      "start": 148,
+      "end": 161.50385487528345,
+      "loop": false
+    },
+    "12-heartbeat-2": {
+      "start": 163,
+      "end": 174.84943310657596,
+      "loop": false
+    },
+    "13-heroic-death": {
+      "start": 176,
+      "end": 185.84090702947844,
+      "loop": false
+    },
+    "14-potion-2": {
+      "start": 187,
+      "end": 193.99936507936508,
+      "loop": false
+    },
+    "15-the-shadow": {
+      "start": 195,
+      "end": 203.84244897959184,
+      "loop": false
+    },
+    "16-float": {
+      "start": 205,
+      "end": 228.83963718820863,
+      "loop": false
+    },
+    "17-timer": {
+      "start": 230,
+      "end": 241.76816326530613,
+      "loop": false
+    },
+    "18-tragic-end": {
+      "start": 243,
+      "end": 260.192925170068,
+      "loop": false
+    },
+    "19-jaffar-2": {
+      "start": 262,
+      "end": 273.0744671201814,
+      "loop": false
+    },
+    "20-jaffar-dead": {
+      "start": 275,
+      "end": 280.65986394557825,
+      "loop": false
+    },
+    "21-embrace": {
+      "start": 282,
+      "end": 296.03791383219954,
+      "loop": false
+    },
+    "22-epilogue": {
+      "start": 298,
+      "end": 415.6308390022676,
+      "loop": false
+    }
+  }
+}

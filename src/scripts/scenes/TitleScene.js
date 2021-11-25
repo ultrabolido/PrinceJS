@@ -8,6 +8,8 @@ class TitleScene extends Scene {
 
     create() {
 
+        //this.sound.addAudioSprite('music');
+
         this.back = this.add.image(0, 0, 'title', 'main_background').setOrigin(0,0);
         this.presents = this.add.image(this.scale.width * 0.5, this.scale.height * 0.5 + 29.5, 'title', 'presents').setOrigin(0.5,0.5).setVisible(false);
         this.author = this.add.image(this.scale.width * 0.5 - 3, this.scale.height * 0.5 + 37, 'title', 'author').setOrigin(0.5,0.5).setVisible(false);
@@ -24,20 +26,28 @@ class TitleScene extends Scene {
             width: this.textBack.width,
             duration: 200,
             paused: true,
-            completeDelay: 2000,
+            completeDelay: 12500,
             onCompleteScope: this,
-            onComplete: function() { this.cameras.main.fadeOut(2000) }
+            onComplete: function() { this.cameras.main.fadeOut(2500) }
         });
 
+        this.time.delayedCall(800, () => this.sound.playAudioSprite('music','01-prologue-a'), [], this);
         this.time.delayedCall(4000, () => this.presents.setVisible(true), [], this);
-        this.time.delayedCall(6000, () => this.presents.setVisible(false), [], this);
-        this.time.delayedCall(7000, () => this.author.setVisible(true), [], this);
-        this.time.delayedCall(9000, () => this.author.setVisible(false), [], this);
-        this.time.delayedCall(10000, () => this.prince.setVisible(true), [], this);
-        this.time.delayedCall(12000, () => this.tween1.play(), [], this);
+        this.time.delayedCall(8000, () => this.presents.setVisible(false), [], this);
+        this.time.delayedCall(9500, () => this.author.setVisible(true), [], this);
+        this.time.delayedCall(13000, () => this.author.setVisible(false), [], this);
+        this.time.delayedCall(17000, () => this.prince.setVisible(true), [], this);
+        this.time.delayedCall(26000, () => this.sound.playAudioSprite('music','02-prologue-b'), [], this);
+        this.time.delayedCall(26500, () => this.tween1.play(), [], this);
     
-        this.cameras.main.on('camerafadeoutcomplete', () => this.scene.start('CutScene'));
-        this.input.keyboard.on('keydown', () => this.scene.start('GameScene'));
+        this.cameras.main.on('camerafadeoutcomplete', () => {
+            this.sound.stopAll();
+            this.scene.start('CutScene')
+        });
+        this.input.keyboard.on('keydown', () => {
+            this.sound.stopAll();
+            this.scene.start('GameScene')
+        });
         
 	}
 

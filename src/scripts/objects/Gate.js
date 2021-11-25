@@ -132,6 +132,7 @@ class Gate extends Object {
         if ( this.state != STATE_CLOSED ) {
             
             this.state = STATE_FAST_DROPPING;
+            this.scene.sfx.play('06-gate-reaches-floor');
             
         }
         

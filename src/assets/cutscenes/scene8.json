@@ -5,12 +5,13 @@
                  { "i": "START_OBJECT", "p1": 0 },
                  { "i": "START" },
                  { "i": "ACTION", "p1": 0, "p2": "stroke" },
-                 { "i": "ACTION", "p1": 1, "p2": "stop" },
+                 { "i": "ACTION", "p1": 1, "p2": "stand" },
+                 { "i": "MUSIC", "p1": "17-timer"},
                  { "i": "WAIT", "p1": 30 },
                  { "i": "ACTION", "p1": 1, "p2": "leave" },
                  { "i": "WAIT", "p1": 20 },
                  { "i": "ACTION", "p1": 0, "p2": "rise" },
-                 { "i": "WAIT", "p1": 20 },
+                 { "i": "WAIT", "p1": 30 },
                  { "i": "END" } ]
     
 }

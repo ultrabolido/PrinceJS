@@ -4,6 +4,8 @@
                  { "i": "START_OBJECT", "p1": 0 },
                  { "i": "START" },
                  { "i": "ACTION", "p1": 0, "p2": "stand" },
-                 { "i": "WAIT", "p1": 40 },
+                 { "i": "WAIT", "p1": 8 },
+                 { "i": "MUSIC", "p1": "12-heartbeat-2"},
+                 { "i": "WAIT", "p1": 90 },
                  { "i": "END" } ]
 }

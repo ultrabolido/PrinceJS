@@ -24,6 +24,9 @@ class GameScene extends Scene {
         this.flashCount = 0;
         this.guards = [];
 
+        this.sound.stopAll();
+        this.sfx = this.sound.addAudioSprite('sounds');
+
         const json = this.cache.json.get('level' + GameState.currentLevel);
 
         this.backLayer = this.add.layer().setDepth(10);

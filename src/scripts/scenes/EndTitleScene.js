@@ -19,14 +19,14 @@ class EndTitleScene extends Scene {
             targets: this.back,
             alpha: 1,
             duration: 2000,
-            completeDelay: 3000
+            completeDelay: 17000
         });
         
         timeline.add({
             targets: this.cropRect,
             width: this.textBack.width,
             duration: 200,
-            completeDelay: 3000,
+            completeDelay: 95000,
             onCompleteScope: this,
             onComplete: function() { this.back.destroy(); }
         });
@@ -39,6 +39,7 @@ class EndTitleScene extends Scene {
 
         timeline.on('complete', () => this.scene.start('TitleScene'));
         timeline.play();
+        this.sound.playAudioSprite('music','22-epilogue')
 	}
    
 	update() {

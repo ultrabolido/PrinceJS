@@ -111,9 +111,8 @@ class Actor extends Phaser.GameObjects.Sprite {
         
     }
     
-    CMD_TAP(data) {
+    CMD_TAP() {
         
-        //console.log('Pending TAP implementation');
         
     }
     
@@ -192,6 +191,10 @@ class Actor extends Phaser.GameObjects.Sprite {
     setAction(value) {
         this._action = value;
         this._seqpointer = 0;
+    }
+
+    remove() {
+        this.setVisible(false);
     }
 }
 

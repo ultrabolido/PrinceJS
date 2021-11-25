@@ -53,11 +53,16 @@ class CutScene extends Scene {
         
         if (GameState.currentLevel != 15) {
 
-            this.input.keyboard.on('keydown', () => this.scene.start('GameScene'));
+            this.input.keyboard.on('keydown', () => {
+                this.sound.stopAll();
+                this.scene.start('GameScene');
+            });
 
         }
 
         this.cameras.main.fadeIn(2000);
+
+        this.time.addEvent({delay: 100, loop: true, callback: this.customUpdate, callbackScope: this});
         
 	}
     
@@ -86,6 +91,7 @@ class CutScene extends Scene {
                     break;
 
                 case 'ACTION':
+                    console.log("Action: " + opcode.p2);
                     this.actors[opcode.p1].setAction(opcode.p2);
                     break;
 
@@ -94,7 +100,7 @@ class CutScene extends Scene {
                     break;
                     
                 case 'REM_ACTOR':
-                    this.actors[opcode.p1].kill();
+                    this.actors[opcode.p1].remove();
                     break;
                     
                 case 'ADD_OBJECT':
@@ -115,6 +121,14 @@ class CutScene extends Scene {
                     this.waitingTime = opcode.p1;
                     break;
 
+                case 'MUSIC':
+                    this.sound.playAudioSprite('music', opcode.p1);
+                    break;
+
+                case 'SOUND':
+                    this.sound.playAudioSprite('sounds', opcode.p1);
+                    break;
+
             }
             this.pc++;
             
@@ -122,7 +136,7 @@ class CutScene extends Scene {
         
     }
 
-    update() {
+    customUpdate() {
         
         this.executeProgram();
         
@@ -151,7 +165,7 @@ class CutScene extends Scene {
         switch (GameState.currentLevel) {
 
             case 1: this.scene.start('CreditsScene'); break;
-            case 15: GameState.currentLevel = 1; this.scene.start('EndGameScene'); break;
+            case 15: GameState.currentLevel = 1; this.scene.start('EndTitleScene'); break;
             case 16: GameState.currentLevel = 1; this.scene.start('TitleScene'); break;
             default: this.scene.start('GameScene');
         }

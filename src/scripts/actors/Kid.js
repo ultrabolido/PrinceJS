@@ -90,6 +90,12 @@ class Kid extends Fighter {
     CMD_IFWTLESS() {
         
     }
+
+    CMD_TAP() {
+        
+        this.scene.sfx.play('20-footstep');
+        
+    }
     
     CMD_EFFECT() {
         if (this.getAction() == 'pickupsword') this.scene.swordFlash();

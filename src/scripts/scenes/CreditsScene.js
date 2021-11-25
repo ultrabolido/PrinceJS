@@ -20,8 +20,8 @@ class CreditsScene extends Scene {
         timeline.add({
             targets: this.textBack,
             alpha: 1,
-            duration: 2000,
-            completeDelay: 3000
+            duration: 2500,
+            completeDelay: 17000
         });
         
         timeline.add({
@@ -37,7 +37,7 @@ class CreditsScene extends Scene {
             targets: this.cropCredits,
             width: this.credits.width,
             duration: 200,
-            completeDelay: 3000,
+            completeDelay: 7000,
             onCompleteScope: this,
             onComplete: function() { this.back.destroy(); }
         });
@@ -51,7 +51,10 @@ class CreditsScene extends Scene {
         timeline.on('complete', this.demo, this);
         timeline.play();
         
-        this.input.keyboard.on('keydown', () => this.scene.start('GameScene'));
+        this.input.keyboard.on('keydown', () => {
+            this.sound.stopAll();    
+            this.scene.start('GameScene')
+        });
         
 	}
 
