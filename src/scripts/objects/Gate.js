@@ -25,6 +25,8 @@ class Gate extends Object {
         
         this.state = modifier;
         this.step = 0;
+
+        this.risingSound = true;
     }
 
     setX(x) {
@@ -52,11 +54,14 @@ class Gate extends Object {
             case STATE_RAISING:  
                 if (this.gateBackY == -47) {
                     
+                    this.scene.sfx.play('07-gate-reaches-top');
                     this.state = STATE_WAITING;
                     this.step = 0;
                 
                 } else {
                 
+                    if (this.risingSound) this.scene.sfx.play('05-gate-rising');
+                    this.risingSound = !this.risingSound;
                     this.gateBackY -= 1;
                     this.gateBack.y -= 1;
                     this.gateFront.y -= 1;
@@ -78,6 +83,7 @@ class Gate extends Object {
             case STATE_DROPPING:                         
                 if (!this.step) {
                     
+                    this.scene.sfx.play('04-gate-lowering');
                     this.gateBack.y += 1;
                     this.gateBackY += 1;
                     this.gateFront.y += 1;
@@ -122,7 +128,7 @@ class Gate extends Object {
         if ( this.state != STATE_WAITING ) {
             
             this.state = STATE_RAISING;
-            
+            this.risingSound = true;
         }
         
     }

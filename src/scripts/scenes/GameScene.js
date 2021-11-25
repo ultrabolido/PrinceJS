@@ -4,8 +4,8 @@ import Interface from '../ui/Interface';
 import Kid from '../actors/Kid';
 import Enemy from '../actors/Enemy';
 import LevelManager from '../levels/LevelManager';
+import SpecialEvents from '../levels/SpecialEvents';
 import { ROOM_HEIGHT, ROOM_WIDTH } from '../Config'
-import { TILE } from '../Constants';
 import { toMinutes, toMilliseconds } from '../Utils';
 
 const RED_COLOR = 'rgba(255,85,85,1)';
@@ -23,11 +23,14 @@ class GameScene extends Scene {
 
         this.flashCount = 0;
         this.guards = [];
+        this.tileShaking = false;
 
         this.sound.stopAll();
         this.sfx = this.sound.addAudioSprite('sounds');
 
         const json = this.cache.json.get('level' + GameState.currentLevel);
+
+        this.specialEvents = new SpecialEvents(this);
 
         this.backLayer = this.add.layer().setDepth(10);
         this.frontLayer = this.add.layer().setDepth(30);
@@ -58,9 +61,6 @@ class GameScene extends Scene {
         this.ui = new Interface(this);
         this.ui.setPlayer(this.kid);
         
-        // for level 1 only -> close gate first room !!!
-        if ( GameState.currentLevel == 1 ) this.level.fireEvent(8, TILE.DROP_BUTTON);
-        
         this.input.keyboard.on('keydown-Q', this.previousLevel, this);
         this.input.keyboard.on('keydown-W', this.nextLevel, this);
         this.input.keyboard.on('keydown-R', this.reset, this);
@@ -79,6 +79,8 @@ class GameScene extends Scene {
 
 
         this.time.addEvent({delay: 1000, loop: true, callback: this.updateTime, callbackScope: this});
+
+        this.specialEvents.levelStart();
         
 	}
     
@@ -197,6 +199,7 @@ class GameScene extends Scene {
     
     setupCamera(room) {
       
+        if (room == -1) return;
         this.cameras.main.scrollX = this.level.rooms[room].x * ROOM_WIDTH;
         this.cameras.main.scrollY = this.level.rooms[room].y * ROOM_HEIGHT;
         this.currentRoom = room;

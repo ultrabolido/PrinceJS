@@ -10,8 +10,6 @@ class Kid extends Fighter {
 
         super(scene, level, location, direction, room, 'kid');
 
-        this.charX -= 7;
-
         this.scene = scene;
         
         this.fallingBlocks = 0;
@@ -23,6 +21,8 @@ class Kid extends Fighter {
         this.inJumpUP = false;
         this.charRepeat = false;
         this.recoverCrop = false;
+
+        this.specialLand = false;
         
         this.cursors = scene.input.keyboard.createCursorKeys();
         this.shiftKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
@@ -93,14 +93,21 @@ class Kid extends Fighter {
 
     CMD_TAP() {
         
+        if (this.getAction() == 'softland') return;
+        if (this.scene.tileShaking) return;
+
         this.scene.sfx.play('20-footstep');
         
     }
     
     CMD_EFFECT() {
-        if (this.getAction() == 'pickupsword') this.scene.swordFlash();
+        if (this.getAction() == 'pickupsword') {
+            this.scene.swordFlash();
+            this.scene.sound.playAudioSprite('music','10-victory-2');
+        }
         if (this.getAction() == 'drinkpotion') {
             this.scene.potionFlash();
+            this.scene.sound.playAudioSprite('music','08-potion-1');
             this.recoverLive();
         }
     }
@@ -370,6 +377,7 @@ class Kid extends Fighter {
         this.updateBlockXY();
         this.setAction('hang');
         this.processCommand();
+        this.scene.sfx.play('09-bump-hard');
         
     }
     
@@ -552,15 +560,19 @@ class Kid extends Fighter {
                     this.charX -= 5 * this.charFace;
                     this.fallingBlocks = 0;
                     this.land();
+                    // Play sound here to overwrite soft land sound
+                    this.scene.sfx.play('08-bump-soft');
                     
                 } else {
                     
                     this.setAction('bump');
+                    this.scene.sfx.play('08-bump-soft');
                     this.processCommand();
                     
                 }
             }
         }
+
         
     }
     
@@ -907,14 +919,34 @@ class Kid extends Fighter {
         this.charXVel = 0;
         this.charYVel = 0;
         
-        if (this.fallingBlocks <  2 ) this.setAction('softland');
-        if (this.fallingBlocks == 2 ) {
-            this.setAction('medland');
-            this.hit(1);
+        if (this.fallingBlocks <  2 ) {
+    
+            if (this.specialLand) {
+
+                this.setAction('medland');
+                this.specialLand = false;
+                this.scene.sound.playAudioSprite('music','06-danger');
+
+            } else {
+                this.setAction('softland');
+                this.scene.sfx.play('15-soft-land');
+            }
+
         }
+    
+        if (this.fallingBlocks == 2 ) {
+
+            this.setAction('medland');
+            this.scene.sfx.play('14-medium-land');
+            this.hit(1);
+
+        }
+
         if (this.fallingBlocks >  2 ) {
+
             this.setAction(KID_INMORTAL ? 'medland':'dropdead');
             this.hit(this.health);
+
         }
         
         this.processCommand();

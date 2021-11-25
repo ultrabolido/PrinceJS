@@ -235,6 +235,8 @@ class Fighter extends Actor {
                 
                 if ( !this.opponent.frameID(150) && !this.opponent.frameID(0) ) {
                     
+                    if (this.charName == 'kid') this.scene.sfx.play('11-stab-air');
+
                     if ( this.frameID(154) || this.frameID(4) )  {
                     
                         var minHurtDistance = this.opponent.swordDrawn ? 12 : 8;
@@ -253,6 +255,7 @@ class Fighter extends Actor {
                     this.setAction('blockedstrike');
                     this.processCommand();
                     this.emit('strikeblocked');
+                    if (this.charName == 'kid') this.scene.sfx.play('10-sword-impact');
                     
                 }
                 break;
@@ -320,6 +323,7 @@ class Fighter extends Actor {
       
         this.setAction('engarde');
         this.swordDrawn = true;
+        if (this.charName == 'kid') this.scene.sfx.play('16-unsheathe-sword');
         
     }
     
@@ -333,6 +337,7 @@ class Fighter extends Actor {
       
         this.setAction('resheathe');
         this.swordDrawn = false;
+        if (this.charName == 'kid') this.scene.sfx.play('16-unsheathe-sword');
         
     }
     
@@ -381,17 +386,19 @@ class Fighter extends Actor {
     }
     
     block() {
-      
+
         if ( this.frameID(8) || this.frameID(20,21) || this.frameID(18) || this.frameID(15) ) {
             
             if (this.opponentDistance() >= 32) return this.retreat();
             if (!this.opponent.frameID(152) && !this.opponent.frameID(2)) return;
             this.setAction('block');
+            if (this.charName == 'kid') this.scene.sfx.play('10-sword-impact');
             
         } else {
             
             if (!this.frameID(17)) return;
             this.setAction('striketoblock');
+            //if (this.charName == 'kid') this.scene.sfx.play('10-sword-impact');
             
         }
         
@@ -410,6 +417,11 @@ class Fighter extends Actor {
         var damage = this.swordDrawn ? 1 : this.health;
         this.hit(damage);
         this.setAction(this.health == 0 ? 'stabkill' : 'stabbed');
+        if (this.charName == 'kid') {
+            this.scene.sfx.play('13-stabbed');
+        } else {
+            this.scene.sfx.play('12-stab-opponent');
+        }
         
     }
         

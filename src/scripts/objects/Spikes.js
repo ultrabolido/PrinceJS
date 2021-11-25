@@ -11,6 +11,8 @@ class Spikes extends Object {
     constructor(scene, x, y, levelType, modifier) {
     
         super(scene, x, y, TILE.SPIKES, levelType);
+
+        this.scene = scene;
     
         this.state = STATE_INACTIVE;
         this.step = 0;
@@ -20,11 +22,11 @@ class Spikes extends Object {
         if (modifier == 6) { modifier = 4; }
         if (modifier > 6) { modifier = 9 - modifier; }
         
-        this.spikeBack = scene.add.sprite(0,0,this.key, this.key + '_' + TILE.SPIKES + '_' + modifier);
-        scene.backLayer.add(this.spikeBack);
+        this.spikeBack = this.scene.add.sprite(0,0,this.key, this.key + '_' + TILE.SPIKES + '_' + modifier);
+        this.scene.backLayer.add(this.spikeBack);
         
-        this.spikeFront = scene.add.sprite(0,0,this.key, this.key + '_' + TILE.SPIKES + '_' + modifier + '_fg');
-        scene.frontLayer.add(this.spikeFront);
+        this.spikeFront = this.scene.add.sprite(0,0,this.key, this.key + '_' + TILE.SPIKES + '_' + modifier + '_fg');
+        this.scene.frontLayer.add(this.spikeFront);
     }
 
     update() {
@@ -86,6 +88,7 @@ class Spikes extends Object {
         if (this.state == STATE_INACTIVE) {
             
             this.state = STATE_RAISING;
+            this.scene.sfx.play('26-spikes');
             
         } else {
             

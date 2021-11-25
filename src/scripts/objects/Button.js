@@ -20,7 +20,11 @@ class Button extends Object {
             if (this.step == this.stepMax) {
                 
                 this.tileBack.setFrame(this.key + '_' + this.tileType).setOrigin(0,0);
-                this.tileFront.setFrame(this.key + '_' + this.tileType + '_fg').setOrigin(0,0);
+                if (this.tileType == TILE.RAISE_BUTTON) {
+                    this.tileFront.setFrame(this.key + '_' + this.tileType + '_fg').setOrigin(0,0);
+                } else {
+                    this.tileFront.setVisible(true);
+                }
                 if (this.maskFrame) { 
                     this.mask();
                 } 
@@ -38,10 +42,15 @@ class Button extends Object {
             
             this.active = true;
             this.tileBack.setFrame(this.tileBack.frame.name + '_down').setOrigin(0,0);
-            this.tileFront.setFrame(this.key + '_' + TILE.FLOOR + '_fg').setOrigin(0,0);
+            if (this.tileType == TILE.RAISE_BUTTON) {
+                this.tileFront.setFrame(this.key + '_' + TILE.FLOOR + '_fg').setOrigin(0,0);
+            } else {
+                this.tileFront.setVisible(false);
+            }
             if (this.maskFrame) {
                 this.mask();
             } 
+            this.scene.sfx.play('19-button-push');
             this.emit('pushed', this.modifier, this.tileType);
             
         }
