@@ -1,8 +1,10 @@
 import Fighter from './Fighter';
-import { TILE, ACTION } from '../Constants';
+import { TILE, ACTION, SOUND } from '../Constants';
 import GameState from "../ui/GameState";
 import { KID_INMORTAL } from '../Config';
 import { convertBlockXtoX, convertBlockYtoY, convertXtoBlockX, convertX, distanceToEdgeFromX } from '../Utils';
+
+const MAX_GRAB_FALLING_SPEED = 32;
 
 class Kid extends Fighter {
 
@@ -93,10 +95,7 @@ class Kid extends Fighter {
 
     CMD_TAP() {
         
-        if (this.getAction() == 'softland') return;
-        if (this.scene.tileShaking) return;
-
-        this.scene.sfx.play('20-footstep');
+        this.scene.requestSoundPlay(SOUND.FOOTSTEP);
         
     }
     
@@ -261,6 +260,12 @@ class Kid extends Fighter {
                 if ( !this.keyS() ) return this.startFall();
                 break;
             
+            case 'jumpfall':
+            case 'rjumpfall':
+            case 'bumpfall':
+                if ( this.keyS() ) return this.tryGrabEdge();
+                break;
+
             case 'freefall':
                 if ( this.keyS() ) return this.tryGrabEdge();
                 break;
@@ -341,24 +346,26 @@ class Kid extends Fighter {
     }
     
     tryGrabEdge() {
-        
+
+        this.updateBlockXY();
+        if (this.charYVel > MAX_GRAB_FALLING_SPEED) return;
+
+        //const blockX = convertXtoBlockX(this.charX - 8 * this.charFace);
+
+        if (this.distanceToEdge() > 8 + ((this.getAction() == 'stepfall') ? 3 : 0)) return;
+        if ((this.actionCode == ACTION.IN_MIDAIR) && (this.distanceToTopFloor() < -50)) return;
+        if ((this.actionCode == ACTION.FREE_FALL) && (this.distanceToFloor() <= -3)) return;
+
         var tileT = this.level.getTileAt(this.charBlockX, this.charBlockY - 1, this.room);
         var tileTF = this.level.getTileAt(this.charBlockX + this.charFace, this.charBlockY - 1, this.room);
         var tileTR = this.level.getTileAt(this.charBlockX - this.charFace, this.charBlockY - 1, this.room);
-      
-        if ( tileTF.isWalkable() && ( tileT.tileType == TILE.SPACE) ) {
 
-            if (this.distanceToEdge() < 5) return this.grab(this.charBlockX);
-            
+        if (tileTF.isWalkable() && tileT.isSpace()) {
+            this.grab(this.charBlockX);
         } else {
-        
-            if ( tileT.isWalkable() && ( tileTR.tileType == TILE.SPACE) ) {
-         
-                
-                if (this.distanceToEdge() < 5) return this.grab(this.charBlockX - 1);
-                
+            if (tileT.isWalkable() && tileTR.isSpace()) {
+                this.grab(this.charBlockX - this.charFace);
             }
-            
         }
         
     }
@@ -368,7 +375,7 @@ class Kid extends Fighter {
         if (this.faceL()) {
             this.charX = convertBlockXtoX(x) - 2;
         } else {
-            this.charX = convertBlockXtoX(x + 1) + 1;  
+            this.charX = convertBlockXtoX(x + 1) + 2;  
         }
         this.charY = convertBlockYtoY(this.charBlockY);
         this.charXVel = 0;
@@ -377,7 +384,7 @@ class Kid extends Fighter {
         this.updateBlockXY();
         this.setAction('hang');
         this.processCommand();
-        this.scene.sfx.play('09-bump-hard');
+        this.scene.requestSoundPlay(SOUND.GRAB);
         
     }
     
@@ -546,7 +553,7 @@ class Kid extends Fighter {
             
         } else {
             
-            var y = this.distanceToFloor();
+            var y = this.distanceToFloor(this.charBlockY);
             console.log('to floor:' + y + ' ' + this.charBlockY + ' ' + this.charY + ' ' + this.charFdy);
             if ( y >= 5 )
             {
@@ -555,18 +562,18 @@ class Kid extends Fighter {
                 
             } else {
                 
+                this.scene.requestSoundPlay(SOUND.BUMPED);
+
                 if ( this.frameID(24,25) || this.frameID(40,42) || this.frameID(102,106) ) {
                     
                     this.charX -= 5 * this.charFace;
                     this.fallingBlocks = 0;
                     this.land();
-                    // Play sound here to overwrite soft land sound
-                    this.scene.sfx.play('08-bump-soft');
+                    
                     
                 } else {
                     
                     this.setAction('bump');
-                    this.scene.sfx.play('08-bump-soft');
                     this.processCommand();
                     
                 }
@@ -673,7 +680,8 @@ class Kid extends Fighter {
                 var tile = this.level.getTileAt(this.charBlockX, this.charBlockY - 1, this.room);
                 if (tile.isButton() && (this.frameID(80) || this.getAction() == 'hang')) tile.push();
                 break;
-                            
+                     
+            case ACTION.IN_MIDAIR:
             case ACTION.FREE_FALL: 
             
                 console.log('charY: ' + this.charY + ' fdy: ' + this.charFdy);
@@ -929,7 +937,7 @@ class Kid extends Fighter {
 
             } else {
                 this.setAction('softland');
-                this.scene.sfx.play('15-soft-land');
+                this.scene.requestSoundPlay(SOUND.SOFT_LAND);
             }
 
         }
@@ -937,7 +945,7 @@ class Kid extends Fighter {
         if (this.fallingBlocks == 2 ) {
 
             this.setAction('medland');
-            this.scene.sfx.play('14-medium-land');
+            this.scene.requestSoundPlay(SOUND.MEDIUM_LAND);
             this.hit(1);
 
         }
@@ -984,6 +992,12 @@ class Kid extends Fighter {
     distanceToFloor() {
     
         return convertBlockYtoY(this.charBlockY) - this.charY - this.charFdy;
+    
+    }
+
+    distanceToTopFloor() {
+    
+        return convertBlockYtoY(this.charBlockY - 1) - this.charY - this.charFdy;
     
     }
     

@@ -1,5 +1,5 @@
 import Object from './Object';
-import { TILE } from '../Constants';
+import { TILE, SOUND } from '../Constants';
 
 class Button extends Object {
     constructor(scene, x, y, tileType, levelType, modifier) {
@@ -50,7 +50,7 @@ class Button extends Object {
             if (this.maskFrame) {
                 this.mask();
             } 
-            this.scene.sfx.play('19-button-push');
+            this.scene.requestSoundPlay(SOUND.BUTTON_PRESSED);
             this.emit('pushed', this.modifier, this.tileType);
             
         }

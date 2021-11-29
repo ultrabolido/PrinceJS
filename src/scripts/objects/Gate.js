@@ -1,5 +1,5 @@
 import Object from './Object';
-import { TILE } from '../Constants';
+import { TILE, SOUND } from '../Constants';
 
 const STATE_CLOSED = 0;
 const STATE_OPEN = 1;
@@ -54,13 +54,13 @@ class Gate extends Object {
             case STATE_RAISING:  
                 if (this.gateBackY == -47) {
                     
-                    this.scene.sfx.play('07-gate-reaches-top');
+                    this.scene.requestSoundPlay(SOUND.GATE_STOP);
                     this.state = STATE_WAITING;
                     this.step = 0;
                 
                 } else {
                 
-                    if (this.risingSound) this.scene.sfx.play('05-gate-rising');
+                    if (this.risingSound) this.scene.requestSoundPlay(SOUND.GATE_OPENING);
                     this.risingSound = !this.risingSound;
                     this.gateBackY -= 1;
                     this.gateBack.y -= 1;
@@ -83,7 +83,7 @@ class Gate extends Object {
             case STATE_DROPPING:                         
                 if (!this.step) {
                     
-                    this.scene.sfx.play('04-gate-lowering');
+                    this.scene.requestSoundPlay(SOUND.GATE_CLOSING, this);
                     this.gateBack.y += 1;
                     this.gateBackY += 1;
                     this.gateFront.y += 1;
@@ -92,6 +92,7 @@ class Gate extends Object {
                         
                         //this.gateFront.setCrop();
                         this.state = STATE_CLOSED;
+                        this.scene.requestSoundPlay(SOUND.GATE_STOP, this);
                         
                     }
                     this.step++;
@@ -138,7 +139,7 @@ class Gate extends Object {
         if ( this.state != STATE_CLOSED ) {
             
             this.state = STATE_FAST_DROPPING;
-            this.scene.sfx.play('06-gate-reaches-floor');
+            this.scene.requestSoundPlay(SOUND.GATE_CLOSING_FAST);
             
         }
         

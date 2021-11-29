@@ -1,5 +1,5 @@
 import Object from './Object';
-import { TILE } from '../Constants';
+import { TILE, SOUND } from '../Constants';
 
 const STATE_INACTIVE = 0;
 const STATE_RAISING = 1;
@@ -88,7 +88,7 @@ class Spikes extends Object {
         if (this.state == STATE_INACTIVE) {
             
             this.state = STATE_RAISING;
-            this.scene.sfx.play('26-spikes');
+            this.scene.requestSoundPlay(SOUND.SPIKES);
             
         } else {
             

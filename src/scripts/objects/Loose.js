@@ -1,5 +1,5 @@
 import Object from './Object';
-import { TILE } from '../Constants';
+import { TILE, SOUND } from '../Constants';
 
 const STATE_INACTIVE = 0;
 const STATE_SHAKING = 1;
@@ -7,7 +7,7 @@ const STATE_FALLING = 2;
 
 const FALL_VELOCITY = 3;
 
-const SOUNDS = ['17-loose-floor-shake-3', '18-loose-floor-shake-2', '17-loose-floor-shake-3' ];
+const SOUNDS = [SOUND.LOOSE_SHAKE_1, SOUND.LOOSE_SHAKE_2, SOUND.LOOSE_SHAKE_3];
 
 class Loose extends Object {
 
@@ -37,9 +37,9 @@ class Loose extends Object {
                 if (this.fall) {
                     
                     const p = Phaser.Math.Between(0,2);
-                    if (this.step == 0) this.scene.sfx.play(SOUNDS[p]);
-                    if (this.step == 2) this.scene.sfx.play(SOUNDS[p]);
-                    if (this.step == 7) this.scene.sfx.play(SOUNDS[p]);
+                    if (this.step == 0) this.scene.requestSoundPlay(SOUNDS[p]);
+                    if (this.step == 2) this.scene.requestSoundPlay(SOUNDS[p]);
+                    if (this.step == 7) this.scene.requestSoundPlay(SOUNDS[p]);
 
                 }
 
@@ -81,7 +81,7 @@ class Loose extends Object {
                  
                     this.state = STATE_INACTIVE;
                     this.emit('stopfalling', this);
-                    this.scene.sfx.play('02-loose-floor-lands');
+                    this.scene.requestSoundPlay(SOUND.TILE_CRASHING);
                     
                 }
                 break;

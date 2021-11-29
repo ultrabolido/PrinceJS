@@ -5,8 +5,10 @@ import Kid from '../actors/Kid';
 import Enemy from '../actors/Enemy';
 import LevelManager from '../levels/LevelManager';
 import SpecialEvents from '../levels/SpecialEvents';
+import SNDCFG from '../levels/SoundConfig';
 import { ROOM_HEIGHT, ROOM_WIDTH } from '../Config'
 import { toMinutes, toMilliseconds } from '../Utils';
+import { SOUND } from '../Constants';
 
 const RED_COLOR = 'rgba(255,85,85,1)';
 const STRONG_RED_COLOR = 'rgba(170,0,0,1)';
@@ -23,7 +25,9 @@ class GameScene extends Scene {
 
         this.flashCount = 0;
         this.guards = [];
-        this.tileShaking = false;
+        this.soundPlaying = SOUND.SILENCE;
+        this.requestedSoundPlay = [];
+        this.resetSoundRequest();
 
         this.sound.stopAll();
         this.sfx = this.sound.addAudioSprite('sounds');
@@ -46,7 +50,7 @@ class GameScene extends Scene {
         });
         
         //json.prince.room = 15;
-        //json.prince.location = 13;
+        //json.prince.location = 8;
         
         this.kid = new Kid(this, this.level, json.prince.location, json.prince.direction, json.prince.room);
         
@@ -81,6 +85,7 @@ class GameScene extends Scene {
         this.time.addEvent({delay: 1000, loop: true, callback: this.updateTime, callbackScope: this});
 
         this.specialEvents.levelStart();
+        this.sfx.on('complete', () => { this.soundPlaying = SOUND.SILENCE});
         
 	}
     
@@ -90,7 +95,8 @@ class GameScene extends Scene {
         this.kid.updateActor();
         this.guards.forEach( g => { g.updateActor(); });
         this.ui.update();
-        this.flash()
+        this.flash();
+        this.playSound();
          
     }
 
@@ -103,6 +109,45 @@ class GameScene extends Scene {
             if ((min % 5 == 0) || (min <= 1)) this.showTimeLeft();
         }
         
+    }
+
+    playSound() {
+
+        if ((this.soundPlaying == SOUND.SILENCE) || SNDCFG[this.soundPlaying].int) {
+
+            const last = (this.soundPlaying == SOUND.SILENCE) ? SNDCFG.length : this.soundPlaying + 1;
+
+            for (var i=0; i < last; i++) {
+
+                if (this.requestedSoundPlay[i]) {
+                    this.soundPlaying = i;
+                    this.sfx.play(SNDCFG[i].key);
+                    break;
+                }
+                
+            };
+
+        }
+
+        this.resetSoundRequest();
+
+    }
+
+    requestSoundPlay(sound, tile) {
+
+        if ((tile != undefined) && !this.tileOnScreen(tile)) return;
+        this.requestedSoundPlay[sound] = true;
+
+    }
+
+    tileOnScreen(tile) {
+        return true;
+    }
+
+    resetSoundRequest() {
+
+        for (var i=0; i < SNDCFG.length; i++) this.requestedSoundPlay[i] = false;
+
     }
 
     decrementTime() {

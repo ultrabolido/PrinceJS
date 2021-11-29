@@ -1,0 +1,38 @@
+var SNDCFG = [
+	{ key: '27-princess-door-opening', int: false },
+    { key: '32-blink', int: false },
+    { key: '10-sword-vs-sword', int: true },
+    { key: '13-kid-hurt', int: true },
+    { key: '12-guard-hurt', int: true },
+    { key: '23-chomped', int: false },
+    { key: '24-chomper', int: true },
+    { key: '11-sword-moving', int: true },
+    { key: '01-fell-to-death', int: false },
+    { key: '33-spiked', int: false },
+    { key: '26-spikes', int: false },
+    { key: '28-falling', int: true },
+    { key: '02-tile-crashing', int: true },
+    { key: '06-gate-closing-fast', int: false },
+    { key: '07-gate-stop', int: true },
+    { key: '04-gate-closing', int: true },
+    { key: '05-gate-opening', int: true },
+    { key: '08-bumped', int: true },
+    { key: '09-grab', int: true },
+    { key: '19-button-pressed', int: true },
+    { key: '29-leveldoor-closing', int: false },
+    { key: '30-leveldoor-sliding', int: false },
+    { key: '14-medium-land', int: true },
+    { key: '15-soft-land', int: true },
+    { key: '25-hard-land', int: true },
+    { key: '31-drink', int: false },
+    { key: '16-draw-sword', int: true },
+    { key: '21-skel-alive', int: false },
+    { key: '22-jump-through-mirror', int: false },
+    { key: '03-loose-shake-1', int: true },
+    { key: '18-loose-shake-2', int: true },
+    { key: '17-loose-shake-3', int: true },
+    { key: '20-footstep', int: true }
+];
+
+export default SNDCFG;
+
