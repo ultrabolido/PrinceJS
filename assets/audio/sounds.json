@@ -1,0 +1,172 @@
+{
+  "resources": [
+    "sounds.ogg"
+  ],
+  "spritemap": {
+    "01-fell-to-death": {
+      "start": 0,
+      "end": 0.2089795918367347,
+      "loop": false
+    },
+    "02-tile-crashing": {
+      "start": 2,
+      "end": 2.6733786848072563,
+      "loop": false
+    },
+    "03-loose-shake-1": {
+      "start": 4,
+      "end": 4.11609977324263,
+      "loop": false
+    },
+    "04-gate-closing": {
+      "start": 6,
+      "end": 6.11609977324263,
+      "loop": false
+    },
+    "05-gate-opening": {
+      "start": 8,
+      "end": 8.162539682539682,
+      "loop": false
+    },
+    "06-gate-closing-fast": {
+      "start": 10,
+      "end": 10.5340589569161,
+      "loop": false
+    },
+    "07-gate-stop": {
+      "start": 12,
+      "end": 12.069659863945578,
+      "loop": false
+    },
+    "08-bumped": {
+      "start": 14,
+      "end": 14.208979591836735,
+      "loop": false
+    },
+    "09-grab": {
+      "start": 16,
+      "end": 16.41795918367347,
+      "loop": false
+    },
+    "10-sword-vs-sword": {
+      "start": 18,
+      "end": 18.441179138321996,
+      "loop": false
+    },
+    "11-sword-moving": {
+      "start": 20,
+      "end": 20.11609977324263,
+      "loop": false
+    },
+    "12-guard-hurt": {
+      "start": 22,
+      "end": 22.139319727891156,
+      "loop": false
+    },
+    "13-kid-hurt": {
+      "start": 24,
+      "end": 24.60371882086168,
+      "loop": false
+    },
+    "14-medium-land": {
+      "start": 26,
+      "end": 26.41795918367347,
+      "loop": false
+    },
+    "15-soft-land": {
+      "start": 28,
+      "end": 28.30185941043084,
+      "loop": false
+    },
+    "16-draw-sword": {
+      "start": 30,
+      "end": 30.41795918367347,
+      "loop": false
+    },
+    "17-loose-shake-3": {
+      "start": 32,
+      "end": 32.16253968253968,
+      "loop": false
+    },
+    "18-loose-shake-2": {
+      "start": 34,
+      "end": 34.092879818594106,
+      "loop": false
+    },
+    "19-button-pressed": {
+      "start": 36,
+      "end": 36.11609977324263,
+      "loop": false
+    },
+    "20-footstep": {
+      "start": 38,
+      "end": 38.11609977324263,
+      "loop": false
+    },
+    "21-skel-alive": {
+      "start": 40,
+      "end": 40.39473922902494,
+      "loop": false
+    },
+    "22-jump-through-mirror": {
+      "start": 42,
+      "end": 42.301859410430836,
+      "loop": false
+    },
+    "23-chomped": {
+      "start": 44,
+      "end": 44.39473922902494,
+      "loop": false
+    },
+    "24-chomper": {
+      "start": 46,
+      "end": 46.464399092970524,
+      "loop": false
+    },
+    "25-hard-land": {
+      "start": 48,
+      "end": 48.464399092970524,
+      "loop": false
+    },
+    "26-spikes": {
+      "start": 50,
+      "end": 50.37151927437642,
+      "loop": false
+    },
+    "27-princess-door-opening": {
+      "start": 52,
+      "end": 52.47201814058957,
+      "loop": false
+    },
+    "28-falling": {
+      "start": 54,
+      "end": 55.346757369614515,
+      "loop": false
+    },
+    "29-leveldoor-closing": {
+      "start": 57,
+      "end": 57.92879818594104,
+      "loop": false
+    },
+    "30-leveldoor-sliding": {
+      "start": 59,
+      "end": 60.056009070294785,
+      "loop": false
+    },
+    "31-drink": {
+      "start": 62,
+      "end": 62.789478458049885,
+      "loop": false
+    },
+    "32-blink": {
+      "start": 64,
+      "end": 64.05804988662132,
+      "loop": false
+    },
+    "33-spiked": {
+      "start": 66,
+      "end": 66.38748299319728,
+      "loop": false
+    }
+  }
+}

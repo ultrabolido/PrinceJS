@@ -1,9 +1,10 @@
 {
     "program": [ { "i": "ADD_ACTOR", "p1": 0, "p2": "princess", "p3": 62,  "p4": 167, "p5": 1 },
-                 { "i": "ADD_OBJECT", "p1": 0, "p2": 2, "p3": 152, "p4": 141 },
+                 { "i": "ADD_OBJECT", "p1": 0, "p2": 3, "p3": 152, "p4": 141 },
                  { "i": "START_OBJECT", "p1": 0 },
                  { "i": "START" },
+                 { "i": "MUSIC", "p1": "12-heartbeat-2"},
                  { "i": "ACTION", "p1": 0, "p2": "stand" },
-                 { "i": "WAIT", "p1": 40 },
+                 { "i": "WAIT", "p1": 80 },
                  { "i": "END" } ]
 }

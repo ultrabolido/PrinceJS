@@ -1,0 +1,7 @@
+{
+    "program": [ { "i": "ADD_OBJECT", "p1": 0, "p2": 6, "p3": 152, "p4": 141 },
+                 { "i": "START" },
+                 { "i": "MUSIC", "p1": "18-tragic-end"},
+                 { "i": "WAIT", "p1": 130 },
+                 { "i": "END" } ]
+}
